@@ -1,0 +1,127 @@
+.body{
+    max-width: 100%;
+    
+}
+.puntuacion li a{
+    color: white;
+    text-decoration: none;
+    max-width: 100%;
+}
+
+.img-bg{
+    background: url("../assets/img/payasito-chaqueta-azul-transparente.png");
+    background-repeat: no-repeat;
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    background-position: 50% 0;
+}
+img-payasito{
+    width: 100%;
+    height: 100vh;
+    max-width: 100%;
+}
+.composition-a{
+    height: 700px;
+}
+.gb-color{
+    background-color: #e9ecef;
+}
+.centrado{
+    transform: translateZ(50px);
+}
+.ingreso{
+    display: block;
+}
+.centrado-total{
+    transform: translate(45%, 450%)
+    
+}
+
+.footer-a{
+    font-family: 'Courier New', Courier, monospace;
+    color: rgba(180,180,185,0.9);
+}
+
+.bienvenida{
+    text-align: center;
+    border: 1px solid blue;
+    border-radius: 8px;
+    background-color: #7E9CEB;
+    margin-top: 5px;
+    color: cornsilk;
+}
+.img{
+    width: 300px;
+    height: 300px;
+}
+.start{
+    text-align: center;
+    color: darkblue;
+}
+audio{
+    max-width: 100%;
+}
+button{
+    width: 220px;
+    border-radius: 8px;
+}
+.redireg {
+    text-align: center;
+}
+.redireg  a{
+    text-decoration: none;
+    line-height: 5em;
+    color: white;
+}
+
+.regis{
+    width: 180px;
+    height: 100px;
+}
+#flecha{
+    position: relative;
+}
+.audioR{
+    display: block;
+    align-content: center;
+}
+.response1 {
+    display: none;
+}
+
+.response2{
+    display: none;
+}
+.response3{
+     display: none; 
+} 
+.response4{
+    display: none;
+}
+.bold {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+#PatoAnimado{
+    position: relative;
+
+}
+
+.btn-rond2{
+    width: 75px;
+    max-width: 100%;
+    background-color: chocolate;
+}
+
+.centrado-div{
+    display: inline;
+    color: #120992c7;
+}
+
+.emoji{
+    font-size: 1.1em;
+}
+.tam{
+    font-size: 3em;
+}

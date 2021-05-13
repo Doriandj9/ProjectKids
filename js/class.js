@@ -1,7 +1,12 @@
 let nameUserF;
 let respon = document.querySelector(".response0");
-let errorR = [];
-let puntuacionF = 0;
+let puntuacionFinal = [
+  {  ronda: 1, errores: 0, aciertos: 0 },
+  {  ronda: 2, errores: 0, aciertos: 0 },
+  {  ronda: 3, errores: 0, aciertos: 0 },
+  {  ronda: 4, errores: 0, aciertos: 0 },
+];
+let count = 0;
 // ------------------------------------------Sirve para generar el usuario y en caso de no existir mostrar un flecha con la
 // opcion de registrarse
 class generator {
@@ -47,7 +52,6 @@ class generator {
   <a href="../dir/Registro.html" class= "btn btn-primary regis">Registrate</a>`;
     redit.className = "container  redireg";
     document.body.insertBefore(document.body.appendChild(redit), scrip);
-    
   }
 }
 
@@ -79,11 +83,10 @@ for (let i = 0; i < children.length; i++) {
       fue.picture();
       event.target.style.display = "none";
       if (event.target.value != "Pato") {
-        errorR.push(1);
+        puntuacionFinal[0].errores += 1;
       } else {
-        puntuacionF += 1;
+        puntuacionFinal[0].aciertos += 1;
       }
-      console.log(puntuacionF, errorR);
       event.stopPropagation();
     }
   });
@@ -129,7 +132,7 @@ class picture {
 
   picture() {
     this.respuesta_user = document.createElement("h2");
-    console.log(this.index);
+
     this.respuesta_user.innerHTML =
       (this.value == this.respuestas[this.index] ? "Soy un" : "No soy un") +
       `<span class ="Rpato"> ${this.value} ${
@@ -189,7 +192,6 @@ class picture {
 
   nexUi() {
     let responseNext = document.querySelector(`.response${this.index}`);
-    console.log(this.index);
     responseNext.style.display = "contents";
   }
 }
@@ -236,11 +238,10 @@ for (let i = 0; i < children1.length; i++) {
       ejample_two.picture();
       event.target.style.display = "none";
       if (event.target.value != "Perro") {
-        errorR.push(1);
+        puntuacionFinal[1].errores += 1;
       } else {
-        puntuacionF += 1;
+        puntuacionFinal[1].aciertos += 1;
       }
-      console.log(puntuacionF, errorR);
       event.stopPropagation();
     }
   });
@@ -261,144 +262,102 @@ for (let i = 0; i < children2.length; i++) {
       ejample_three.picture();
       event.target.style.display = "none";
       if (event.target.value != "Caballo") {
-        errorR.push(1);
+        puntuacionFinal[2].errores += 1;
       } else {
-        puntuacionF += 1;
+        puntuacionFinal[2].aciertos += 1;
       }
-      console.log(puntuacionF, errorR);
       event.stopPropagation();
     }
   });
 }
 
-//------------------- Clase de puntuacion
-
-// const punt = document.querySelector(".puntuacionOnclick");
-// const resultP = document.querySelector(".result-puntuacion");
-// const main = document.querySelector("main");
-// let count =0;
-// function clicked(ronda){
-
-// punt.onclick = () =>{
-
-//   console.log(count);
-//   if( count >= 1){
-//     removeF();
-//   }else{
-//   main.style.display= "none";
-//   let div = document.createElement("div");
-//   let laskeys = JSON.parse(localStorage.getItem("Users"))[0].users.length - 1;
-//   div.innerHTML = `<h2>Bienvenido ${JSON.parse(localStorage.getItem("Users"))[0].users[laskeys]} </h2>
-//     <table class="table table-striped table-bordered">
-//       <thead>
-//         <tr>
-//             <th>Ronda</th>
-//             <th>Errores</th>
-//             <th>Puntuacion</th>
-//         </tr>
-//       </thead>
-//       <tbody>
-//             <td></td>
-//             <td></td>
-//             <td></td>
-//       </tbody>
-//     </table>
-//    <div> <button onclick="regresarAl()" class= "btn btn-primary regresar-a"> Regresar </button> </div>`;
-//   div.className = "text-center";
-//   resultP.append(div);
-//   }
-//   count +=1;
-// }
-// }
-// clicked("")
-
-// function removeF(){
-//   document.body.removeChild(div);
-//   resultP.style.display = "contents";
-// }
-
-// function regresarAl(){
-//   main.style.display = "contents";
-//   console.log("salir")
-//   resultP.style.display = "none";
-// }
-
 //-------------------------------------------------Clase de la segunda ronda
 
 class rond2 {
   constructor(value) {
-    this.responsep = document.querySelector(".res-rond2")
+    this.responsep = document.querySelector(".res-rond2");
     this.content;
     this.value = value;
   }
 
-  picture () {
-    
+  picture() {
     this.content = document.createElement("div");
     this.content.className = "centrado-div h2 tam";
     this.content.innerHTML = `${this.value}`;
     this.responsep.style.background = "#1ae707c7";
     this.responsep.append(this.content);
-    
   }
 }
 
 //-----------------------------------------------funcion de resultado-----
 
-const resultR2 = (index) =>{
-  const responseWrite = [["PAPÁ","PÁPA"]];
-  let pictureR = document.querySelector(".res-rond2")
-  let cases = Array.from(pictureR.children).map(x => x.textContent).reduce((x,y) => x+y);
-  if (cases == responseWrite[index][0] || cases == responseWrite[index][1]){
+const resultR2 = (index) => {
+  const responseWrite = [["PAPÁ", "PÁPA"]];
+  let pictureR = document.querySelector(".res-rond2");
+  let cases = Array.from(pictureR.children)
+    .map((x) => x.textContent)
+    .reduce((x, y) => x + y);
+  if (cases == responseWrite[index][0] || cases == responseWrite[index][1]) {
     displayNone();
-    correctOrIcorrect("Correcto","😄")
+    correctOrIcorrect("Correcto", "😄");
+
     new picture("", index + 3).next();
-  }else{
+  } else {
     displayNone();
-    correctOrIcorrect("Incorrecto","😥");
+    correctOrIcorrect("Incorrecto", "😥");
     new picture("", index + 3).next();
   }
-  console.log(cases);
-}
+};
 /// --------------------------funcion A------------------
 
-function displayNone(){
+function displayNone() {
   papaArray.forEach((x) =>
     Array.from(x.children).forEach((x) =>
-      Array.from(x.children).forEach((x) => x.style.display = "none")));
+      Array.from(x.children).forEach((x) => (x.style.display = "none"))
+    )
+  );
 }
 
-///---------------------------Funcion de Correcto o Incorrecto 
+///---------------------------Funcion de Correcto o Incorrecto
 
-function correctOrIcorrect(state, emoji){
+function correctOrIcorrect(state, emoji) {
   let creadora = document.createElement("h2");
   let response2 = document.querySelector(".response3");
-  let div_img = document.querySelector(".img1-rond2")
+  let div_img = document.querySelector(".img1-rond2");
   creadora.innerHTML = `<strong class="h1">${state} <span class="emoji"> ${emoji} </span></strong>`;
-  creadora.style.color = state == "Correcto"? "#00f254":"#EB2623";
+  creadora.style.color = state == "Correcto" ? "#00f254" : "#EB2623";
+
+  if (state != "Correcto") {
+    puntuacionFinal[3].errores += 1;
+    puntuacionF(); 
+    
+  } else {
+    puntuacionFinal[3].aciertos += 1;
+    puntuacionF(); 
+  }
+
+  console.log(puntuacionFinal);
+
   creadora.style.background = "white";
   creadora.className = "text-center";
   response2.append(creadora);
-  response2.insertBefore(creadora,div_img);
+  response2.insertBefore(creadora, div_img);
 }
 /// -------------------------------------------------Evento de la segunda ronda 1-------------------------------
 
 const papa = document.querySelector(".fun-button");
 const papaArray = Array.from(papa.children);
-let county  =0;
+let county = 0;
 papaArray.forEach((x) =>
   Array.from(x.children).forEach((x) =>
     Array.from(x.children).forEach((x) =>
       x.addEventListener("click", (event) => {
         if (event.target.nodeName == "BUTTON") {
-          
-          event.target.style.display ="none";
-          
-          console.log("si llego", event.target.textContent);
+          event.target.style.display = "none";
           new rond2(event.target.textContent).picture();
-          county +=1;
-          if (county >= 4){
-              resultR2(0);
+          county += 1;
+          if (county >= 4) {
+            resultR2(0);
           }
         }
       })
@@ -406,3 +365,50 @@ papaArray.forEach((x) =>
   )
 );
 //county =0;
+
+//------------------- Clase de puntuacion
+
+const punt = document.querySelector("tbody");
+const valueF = document.querySelector(".puntuacion-final");
+let end = document.createElement("h1");
+function puntuacionF () {
+  puntuacionFinal.forEach(elements => {
+    let row = document.createElement("tr");
+    let content = Object.keys (elements);
+    content.forEach( res => {
+      let td = document.createElement("td");
+      td.textContent = elements[res];
+      row.append(td);
+    })
+    punt.append(row);
+  })
+  let errorsP = puntuacionFinal.map(elements => elements.errores).reduce((acum, value) => acum+value);
+  let finalP = puntuacionFinal.map(elements => elements.aciertos).reduce((acum, value) => acum+value);
+  let puntuacionFinalT =finalP*10;
+  puntuacionFinalT = (puntuacionFinalT == 30 ? puntuacionFinalT+10 : puntuacionFinalT);
+
+  puntuacionFinalT = puntuacionFinalT - errorsP;
+
+  console.log(puntuacionFinalT);
+
+  if (puntuacionFinalT < 25){
+    end.innerHTML = `Tu Puntaje es ${puntuacionFinalT} Es un buen puntaje 😀`;
+  end.className = "text-center final";
+  } else if (puntuacionFinalT > 25 && puntuacionFinalT < 35){
+    end.innerHTML = `Tu Puntaje es ${puntuacionFinalT} Bien hecho es un mejor puntaje 😊`;
+  end.className = "text-center final";
+  }else if (puntuacionFinalT >= 35 && puntuacionFinalT < 40){
+    end.innerHTML = `Tu Puntaje es ${puntuacionFinalT} Excelente cerca de la perfección 😊`;
+    end.className = "text-center final";
+  }else if(puntuacionFinalT == 40){
+    end.innerHTML = `Tu Puntaje es ${puntuacionFinalT} Puntaje perfecto 😁`;
+    end.className = "text-center final";
+  }
+  
+  valueF.append(end);
+
+
+
+}
+
+ 
